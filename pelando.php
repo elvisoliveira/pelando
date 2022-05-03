@@ -5,7 +5,7 @@ foreach(["hash", "bot", "key", "target"] as $item) {
     ${$item} = getenv(strtoupper($item));
 }
 
-$reader = League\Csv\Reader::createFromPath('db.csv', 'r');
+$reader = League\Csv\Reader::createFromPath(dirname(__FILE__) . '/db.csv', 'r');
 $reader->setHeaderOffset(0);
 
 $storedIds = [];
@@ -13,7 +13,7 @@ foreach ($reader->getRecords() as $item) {
     array_push($storedIds, $item['id']);
 }
 
-$writer = League\Csv\Writer::createFromPath('db.csv', 'a+');
+$writer = League\Csv\Writer::createFromPath(dirname(__FILE__) . '/db.csv', 'a+');
 
 $variables = json_encode([
     "query" => "microondas",

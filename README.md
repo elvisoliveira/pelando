@@ -1,5 +1,9 @@
 Help to buy stuff :)
 
 ```
-export HASH="" && php ./pelando.php
+export HASH="" && \
+export BOT="" && \
+export KEY="" && \
+export TARGET="" && \
+php ./pelando.php
 ```

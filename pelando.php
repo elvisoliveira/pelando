@@ -1,7 +1,7 @@
 <?php
 require "vendor/autoload.php";
 
-foreach(["hash"] as $item) {
+foreach(["hash", "bot", "key", "target"] as $item) {
     ${$item} = getenv(strtoupper($item));
 }
 
@@ -46,6 +46,13 @@ foreach($body->data->public->searchOffers->edges as $edge) {
             $edge->title,
             $edge->sourceUrl
         ]);
-        // What to do when new enties are found?
+        // Send to Telegram
+        $message = "{$edge->title}\n{$edge->price}";
+        $client->request('GET', "https://api.telegram.org/bot{$bot}:{$key}/sendMessage", [
+            "query" => [
+                "chat_id" => $target,
+                "text" => $message
+            ]
+        ]);
     }
 }
